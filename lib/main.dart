@@ -12,7 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Form Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: const MyFormScreen(),
     );
   }
@@ -36,13 +38,7 @@ class _MyFormScreenState extends State<MyFormScreen> {
   double _age = 18;
   DateTime? _selectedDate;
 
-  final List<String> _countries = [
-    'Palestine',
-    'Jordan',
-    'Eygpt',
-    'Syrya',
-    'Iraq',
-  ];
+  final List<String> _countries = ['Palestine', 'Jordan', 'Eygpt', 'Syrya', 'Iraq'];
   final List<String> _genders = ['Male', 'Female'];
 
   void _submitForm() {
@@ -51,17 +47,16 @@ class _MyFormScreenState extends State<MyFormScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder:
-              (context) => OutputScreen(
-                username: _username,
-                password: _password,
-                email: _email,
-                rememberMe: _rememberMe,
-                gender: _gender,
-                country: _country,
-                age: _age,
-                selectedDate: _selectedDate,
-              ),
+          builder: (context) => OutputScreen(
+            username: _username,
+            password: _password,
+            email: _email,
+            rememberMe: _rememberMe,
+            gender: _gender,
+            country: _country,
+            age: _age,
+            selectedDate: _selectedDate,
+          ),
         ),
       );
     }
@@ -84,7 +79,9 @@ class _MyFormScreenState extends State<MyFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Form Demo')),
+      appBar: AppBar(
+        title: const Text('Flutter Form Demo'),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -166,23 +163,21 @@ class _MyFormScreenState extends State<MyFormScreen> {
                 children: <Widget>[
                   const Text('Gender:'),
                   const SizedBox(width: 10.0),
-                  ..._genders.map(
-                    (gender) => Row(
-                      children: <Widget>[
-                        Radio<String>(
-                          value: gender.toLowerCase(),
-                          groupValue: _gender,
-                          onChanged: (String? value) {
-                            setState(() {
-                              _gender = value;
-                            });
-                          },
-                        ),
-                        Text(gender),
-                        const SizedBox(width: 10.0),
-                      ],
-                    ),
-                  ),
+                  ..._genders.map((gender) => Row(
+                        children: <Widget>[
+                          Radio<String>(
+                            value: gender.toLowerCase(),
+                            groupValue: _gender,
+                            onChanged: (String? value) {
+                              setState(() {
+                                _gender = value;
+                              });
+                            },
+                          ),
+                          Text(gender),
+                          const SizedBox(width: 10.0),
+                        ],
+                      )),
                 ],
               ),
               const SizedBox(height: 16.0),
@@ -192,13 +187,12 @@ class _MyFormScreenState extends State<MyFormScreen> {
                   border: OutlineInputBorder(),
                 ),
                 value: _country,
-                items:
-                    _countries.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                items: _countries.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
                     _country = newValue;
